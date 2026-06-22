@@ -3,30 +3,40 @@ package com.works
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.works.ui.components.CustomButton
 import com.works.ui.theme.ECommerceTheme
+import com.works.ui.theme.Surface
 import org.jetbrains.compose.resources.painterResource
 
 import ecommerce.shared.generated.resources.Res
 import ecommerce.shared.generated.resources.compose_multiplatform
+import ecommerce.shared.generated.resources.ic_home
 
 @Composable
 @Preview
@@ -87,6 +97,59 @@ fun App() {
                 )
 
             CustomButton(onClick = { btnClick() })
+
+
+            var email by remember { mutableStateOf("")}
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Text(
+                text = email
+            )
+
+            for (i in 1..10) {
+
+                Card(
+                    modifier =
+                        Modifier.fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                        .clickable() {
+                                println("Card Clicked: $i - $email")
+                         }
+                    ,
+                    colors = CardDefaults.cardColors(
+                        containerColor = Surface
+                    )
+
+                ) {
+                    Row(
+                        modifier = Modifier.padding(6.dp)
+                    ) {
+
+                        Image(
+                            modifier = Modifier.width(100.dp),
+                            painter = painterResource(Res.drawable.ic_home),
+                            contentDescription = "Logo",
+                        )
+                        Column(
+                            modifier = Modifier.padding(8.dp)
+                        ) {
+                            Text(
+                                text = "iPhone 15",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                            Text(
+                                text = "iPhone 15 is the latest smartphone from Apple. It features a sleek design",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }

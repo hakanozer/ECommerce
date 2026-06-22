@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ecommerce.shared.generated.resources.Res
 import ecommerce.shared.generated.resources.compose_multiplatform
-import ecommerce.shared.generated.resources.ico_home
+import ecommerce.shared.generated.resources.ic_home
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -28,7 +28,7 @@ fun CustomButton( width: Dp = 100.dp, height: Dp = 100.dp, onClick: () -> Unit  
         })
     {
         Image(
-            painter =painterResource(Res.drawable.compose_multiplatform),
+            painter =painterResource(Res.drawable.ic_home),
             contentDescription = "Home",
         )
     }
