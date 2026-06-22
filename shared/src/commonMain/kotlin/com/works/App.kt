@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.works.ui.components.CustomButton
 import com.works.ui.theme.ECommerceTheme
 import org.jetbrains.compose.resources.painterResource
 
@@ -84,6 +86,12 @@ fun App() {
                 style = MaterialTheme.typography.titleLarge
                 )
 
+            CustomButton(onClick = { btnClick() })
         }
     }
+}
+
+
+fun btnClick() {
+    println("Custom Button Click")
 }
