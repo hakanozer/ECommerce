@@ -9,12 +9,6 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.works.shared.Res
-import com.works.shared.nav_likes
-import com.works.shared.nav_product_detail
-import com.works.shared.nav_products
-import com.works.shared.nav_profile
-import org.jetbrains.compose.resources.StringResource
 
 // ─── Top-level graph identifiers ──────────────────────────────────────────────
 
@@ -40,7 +34,7 @@ sealed class AuthRoute(val route: String) {
 
 sealed class MainRoute(
     val route: String,
-    val labelRes: StringResource,
+    val label: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
 ) {
@@ -48,21 +42,21 @@ sealed class MainRoute(
 
     data object Products : MainRoute(
         route         = "main/products",
-        labelRes      = Res.string.nav_products,
+        label         = "Products",
         selectedIcon  = Icons.Filled.ShoppingBag,
         unselectedIcon = Icons.Outlined.ShoppingBag,
     )
 
     data object Likes : MainRoute(
         route         = "main/likes",
-        labelRes      = Res.string.nav_likes,
+        label         = "Likes",
         selectedIcon  = Icons.Filled.FavoriteBorder,
         unselectedIcon = Icons.Outlined.Favorite,
     )
 
     data object Profile : MainRoute(
         route         = "main/profile",
-        labelRes      = Res.string.nav_profile,
+        label         = "Profile",
         selectedIcon  = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person,
     )
@@ -71,7 +65,7 @@ sealed class MainRoute(
 
     data object ProductDetail : MainRoute(
         route          = "main/products/{${NavArgs.PRODUCT_ID}}",
-        labelRes       = Res.string.nav_product_detail,
+        label          = "Product Detail",
         selectedIcon   = Icons.Filled.ShoppingBag,
         unselectedIcon = Icons.Outlined.ShoppingBag,
     ) {

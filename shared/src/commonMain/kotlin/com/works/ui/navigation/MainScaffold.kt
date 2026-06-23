@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -43,14 +42,14 @@ fun MainScaffold(isLoggedIn: Boolean) {
                             icon     = {
                                 Icon(
                                     imageVector  = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
-                                    contentDescription = stringResource(tab.labelRes),
+                                    contentDescription = tab.label,
                                 )
                             },
-                            label    = { Text(stringResource(tab.labelRes)) },
+                            label    = { Text(tab.label) },
                             onClick  = {
                                 navController.navigate(tab.route) {
                                     // Avoid building up a large back stack
-                                    popUpTo(navController.graph.findStartDestination().id) {
+                                    popUpTo(navController.graph.findStartDestination()) {
                                         saveState = true
                                     }
                                     launchSingleTop = true
