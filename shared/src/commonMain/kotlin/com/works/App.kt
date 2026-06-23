@@ -7,5 +7,5 @@ import com.works.ui.theme.ECommerceTheme
 
 @Composable
 fun App() {
-    ECommerceTheme { MainScaffold(isLoggedIn = true) }
+    ECommerceTheme { MainScaffold(isLoggedIn = false) }
 }
