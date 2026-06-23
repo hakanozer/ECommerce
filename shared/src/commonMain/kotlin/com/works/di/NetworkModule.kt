@@ -1,5 +1,6 @@
 package com.works.di
 
+import com.works.data.remote.AuthApi
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -16,4 +17,5 @@ val networkModule = module {
             defaultRequest { url("https://jsonbulut.com/api/") }
         }
     }
+    single { AuthApi(get()) }
 }

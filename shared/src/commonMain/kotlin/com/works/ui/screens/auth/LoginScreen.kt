@@ -35,6 +35,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.works.data.dto.UserLoginRequestDto
+import com.works.data.remote.AuthApi
+import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 private val MainColor = Color(0xFFFF3B1F)
 
@@ -43,6 +47,9 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onNavigateToSignup: () -> Unit
 ) {
+
+    val authApi: AuthApi = koinInject()
+    val scope = rememberCoroutineScope()
 
     var email by remember {
         mutableStateOf("hakanozer02@gmail.com")
@@ -172,12 +179,11 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.width(16.dp))
 
                     Button(
-                        onClick = {
-                            if (
-                                email == "hakanozer02@gmail.com" &&
-                                password == "123456"
-                            ) {
-                                onLoginSuccess()
+                        onClick =  {
+                            scope.launch {
+                                val loginRequestDto = UserLoginRequestDto(email, password)
+                                val res = authApi.login(loginRequestDto)
+                                println(res.data.access_token)
                             }
                         },
                         modifier = Modifier.weight(1f),
