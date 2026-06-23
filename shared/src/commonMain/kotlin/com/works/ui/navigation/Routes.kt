@@ -9,11 +9,11 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.ui.graphics.vector.ImageVector
-import ecommerce.shared.generated.resources.Res
-import ecommerce.shared.generated.resources.nav_likes
-import ecommerce.shared.generated.resources.nav_product_detail
-import ecommerce.shared.generated.resources.nav_products
-import ecommerce.shared.generated.resources.nav_profile
+import com.works.shared.Res
+import com.works.shared.nav_likes
+import com.works.shared.nav_product_detail
+import com.works.shared.nav_products
+import com.works.shared.nav_profile
 import org.jetbrains.compose.resources.StringResource
 
 // ─── Top-level graph identifiers ──────────────────────────────────────────────

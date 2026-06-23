@@ -1,4 +1,4 @@
-rootProject.name = "ECommerce"
+rootProject.name = "ecommerce"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
