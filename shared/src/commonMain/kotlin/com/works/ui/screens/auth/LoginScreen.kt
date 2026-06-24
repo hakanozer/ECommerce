@@ -184,6 +184,8 @@ fun LoginScreen(
                                 val loginRequestDto = UserLoginRequestDto(email, password)
                                 val res = authApi.login(loginRequestDto)
                                 println(res.data.access_token)
+                                // token store
+                                onLoginSuccess()
                             }
                         },
                         modifier = Modifier.weight(1f),
