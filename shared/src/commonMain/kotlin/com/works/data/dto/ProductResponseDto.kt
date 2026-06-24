@@ -12,25 +12,21 @@ data class ProductResponseDto (
 @Serializable
 data class Datum (
     val id: Long,
-    val title: String,
-    val description: String,
-    val category: Category,
-    val price: Double,
-    val discountPercentage: Double,
-    val rating: Double,
-    val stock: Long,
-    val tags: List<String>,
-    val brand: String,
-    val sku: String,
-    val minimumOrderQuantity: Long,
-    val images: List<String>
+    val title: String = "",
+    val description: String = "",
+    val category: String = "",
+    val price: Double = 0.0,
+    val discountPercentage: Double = 0.0,
+    val rating: Double = 0.0,
+    val stock: Long = 0,
+    val tags: List<String> = emptyList(),
+    val brand: String? = null,
+    val sku: String? = null,
+    val minimumOrderQuantity: Long = 0,
+    val images: List<String> = emptyList()
 )
 
-@Serializable
-enum class Category(val value: String) {
-    @SerialName("beauty") Beauty("beauty"),
-    @SerialName("fragrances") Fragrances("fragrances");
-}
+
 
 @Serializable
 data class MetaProduct (

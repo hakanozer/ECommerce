@@ -63,11 +63,9 @@ fun AppNavHost(
         ) {
             // Products tab ─────────────────────────────────────────────────────
             composable(route = MainRoute.Products.route) {
-                ProductsScreen(
-                    onNavigateToDetail = { productId ->
-                        navController.navigate(MainRoute.ProductDetail.createRoute(productId))
-                    },
-                )
+                ProductsScreen { productId ->
+                    navController.navigate(MainRoute.ProductDetail.createRoute(productId))
+                }
             }
 
             composable(

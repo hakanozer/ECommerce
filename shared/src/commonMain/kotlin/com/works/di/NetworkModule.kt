@@ -1,6 +1,7 @@
 package com.works.di
 
 import com.works.data.remote.AuthApi
+import com.works.data.remote.ProductApi
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -18,4 +19,5 @@ val networkModule = module {
         }
     }
     single { AuthApi(get()) }
+    single { ProductApi(get()) }
 }
