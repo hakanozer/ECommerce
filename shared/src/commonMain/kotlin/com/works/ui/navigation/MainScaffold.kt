@@ -49,7 +49,7 @@ fun MainScaffold(isLoggedIn: Boolean) {
                             onClick  = {
                                 navController.navigate(tab.route) {
                                     // Avoid building up a large back stack
-                                    popUpTo(navController.graph.findStartDestination()) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
                                         saveState = true
                                     }
                                     launchSingleTop = true

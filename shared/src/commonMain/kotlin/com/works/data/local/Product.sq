@@ -1,0 +1,30 @@
+CREATE TABLE Product (
+    pid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    category TEXT NOT NULL,
+    price REAL AS Double NOT NULL,
+    discountPercentage REAL AS Double NOT NULL,
+    rating REAL AS Double NOT NULL,
+    stock INTEGER AS Long NOT NULL,
+    tags TEXT NOT NULL,
+    brand TEXT,
+    sku TEXT,
+    minimumOrderQuantity INTEGER AS Long NOT NULL,
+    images TEXT NOT NULL
+);
+
+insertProduct:
+INSERT INTO Product (
+    id, title, description, category, price,
+    discountPercentage, rating, stock,
+    tags, brand, sku, minimumOrderQuantity, images
+) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+
+selectAllProducts:
+SELECT * FROM Product;
+
+deleteProductByPid:
+DELETE FROM Product WHERE pid = ?;
