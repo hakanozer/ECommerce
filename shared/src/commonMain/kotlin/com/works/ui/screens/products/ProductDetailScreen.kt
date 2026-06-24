@@ -20,6 +20,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import com.works.data.local.AppDatabase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,7 +30,9 @@ fun ProductDetailScreen(
 ) {
 
     val productApi: ProductApi = koinInject()
+    val database: AppDatabase = koinInject()
     val scope = rememberCoroutineScope()
+
 
     var isLoading by remember { mutableStateOf(true) }
     var product by remember { mutableStateOf<ProductData?>(null) }
@@ -58,6 +61,34 @@ fun ProductDetailScreen(
                     }
                 }
             )
+            Button(
+                onClick = {
+                    product?.let { data ->
+                        scope.launch {
+                            database.productQueries.insertProduct(
+                                id = data.id?.toLong() ?: 0L,
+                                title = data.title ?: "",
+                                description = data.description ?: "",
+                                category = data.category ?: "",
+                                price = data.price ?: 0.0,
+                                discountPercentage = data.discountPercentage ?: 0.0,
+                                rating = data.rating ?: 0.0,
+                                stock = data.stock?.toLong() ?: 0L,
+                                tags = data.tags?.joinToString(",") ?: "",
+                                brand = data.brand,
+                                sku = data.sku,
+                                minimumOrderQuantity = data.minimumOrderQuantity?.toLong() ?: 0L,
+                                images = data.images?.joinToString(",") ?: ""
+                            )
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(text = "Favorilere Ekle")
+            }
         }
     ) { padding ->
 

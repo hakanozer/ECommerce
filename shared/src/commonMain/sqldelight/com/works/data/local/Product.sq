@@ -4,14 +4,14 @@ CREATE TABLE Product (
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     category TEXT NOT NULL,
-    price REAL AS Double NOT NULL,
-    discountPercentage REAL AS Double NOT NULL,
-    rating REAL AS Double NOT NULL,
-    stock INTEGER AS Long NOT NULL,
+    price REAL NOT NULL,
+    discountPercentage REAL NOT NULL,
+    rating REAL NOT NULL,
+    stock INTEGER NOT NULL,
     tags TEXT NOT NULL,
     brand TEXT,
     sku TEXT,
-    minimumOrderQuantity INTEGER AS Long NOT NULL,
+    minimumOrderQuantity INTEGER NOT NULL,
     images TEXT NOT NULL
 );
 
@@ -20,8 +20,7 @@ INSERT INTO Product (
     id, title, description, category, price,
     discountPercentage, rating, stock,
     tags, brand, sku, minimumOrderQuantity, images
-) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 selectAllProducts:
 SELECT * FROM Product;
