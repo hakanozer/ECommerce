@@ -8,7 +8,7 @@ class JVMPlatform: Platform {
 
 actual fun getPlatform(): Platform = JVMPlatform()
 
-actual class TokenStorage {
+actual class TokenStorage actual constructor() {
     private val prefs = Preferences.userNodeForPackage(TokenStorage::class.java)
 
     actual fun save(token: String) {

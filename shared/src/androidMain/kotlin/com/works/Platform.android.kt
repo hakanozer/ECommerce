@@ -10,7 +10,7 @@ class AndroidPlatform : Platform {
 
 actual fun getPlatform(): Platform = AndroidPlatform()
 
-actual class TokenStorage {
+actual class TokenStorage actual constructor() {
 	companion object {
 		lateinit var context: Context
 	}

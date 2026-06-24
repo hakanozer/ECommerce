@@ -1,6 +1,6 @@
 package com.works
 
-expect class TokenStorage {
+expect class TokenStorage() {
     fun save(token: String)
     fun read(): String?
     fun clear()

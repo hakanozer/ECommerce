@@ -1,5 +1,6 @@
 package com.works.di
 
+import com.works.TokenStorage
 import com.works.data.remote.AuthApi
 import com.works.data.remote.ProductApi
 import io.ktor.client.HttpClient
@@ -20,4 +21,5 @@ val networkModule = module {
     }
     single { AuthApi(get()) }
     single { ProductApi(get()) }
+    single<TokenStorage> { TokenStorage() }
 }

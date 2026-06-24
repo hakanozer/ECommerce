@@ -20,7 +20,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -50,6 +49,7 @@ fun LoginScreen(
 ) {
 
     val authApi: AuthApi = koinInject()
+    val tokenStorage: TokenStorage = koinInject()
     val scope = rememberCoroutineScope()
 
     var email by remember {
@@ -186,7 +186,7 @@ fun LoginScreen(
                                 val res = authApi.login(loginRequestDto)
                                 println(res.data.access_token)
                                 // token store
-
+                                tokenStorage.save(res.data.access_token)
                                 onLoginSuccess()
                             }
                         },

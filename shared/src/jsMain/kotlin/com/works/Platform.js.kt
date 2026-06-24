@@ -9,7 +9,7 @@ class JsPlatform : Platform {
 
 actual fun getPlatform(): Platform = JsPlatform()
 
-actual class TokenStorage {
+actual class TokenStorage actual constructor() {
 	actual fun save(token: String) {
 		window.localStorage.setItem("access_token", token)
 	}
