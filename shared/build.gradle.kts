@@ -73,10 +73,17 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation("io.coil-kt.coil3:coil-compose:3.3.0")
-            implementation("io.coil-kt.coil3:coil-network-ktor3:3.3.0")
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
 
             implementation(libs.sqldelight.runtime)
+        }
+        jvmMain.dependencies {
+            implementation(libs.sqldelight.sqlite.driver)
+            implementation(libs.ktor.client.cio)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
         }
         jsMain.dependencies {
             implementation(libs.wrappers.browser)
