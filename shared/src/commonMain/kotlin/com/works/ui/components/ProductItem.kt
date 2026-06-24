@@ -19,11 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.works.data.dto.Datum
+import com.works.data.dto.ProductItemDto
 
 @Composable
 fun ProductItem(
-    product: Datum,
+    product: ProductItemDto,
     onClick: () -> Unit
 ) {
 

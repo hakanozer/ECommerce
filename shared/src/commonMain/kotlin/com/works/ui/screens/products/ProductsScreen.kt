@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import com.works.data.dto.Datum
+import com.works.data.dto.ProductItemDto
 import com.works.data.remote.ProductApi
 import com.works.ui.components.PaginationBar
 import com.works.ui.components.ProductItem
@@ -21,7 +21,7 @@ fun ProductsScreen(
     val productApi: ProductApi = koinInject()
     val scope = rememberCoroutineScope()
 
-    var products by remember { mutableStateOf<List<Datum>>(emptyList()) }
+    var products by remember { mutableStateOf<List<ProductItemDto>>(emptyList()) }
     var currentPage by remember { mutableStateOf(1) }
     var totalPages by remember { mutableStateOf(1) }
     var loading by remember { mutableStateOf(false) }

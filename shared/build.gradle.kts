@@ -78,6 +78,12 @@ kotlin {
 
             implementation(libs.sqldelight.runtime)
         }
+        jsMain.dependencies {
+            implementation(libs.wrappers.browser)
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.wrappers.browser)
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
