@@ -13,6 +13,6 @@ fun ProductDetailScreen(
     onNavigateBack: () -> Unit
 ) {
     Column {
-        Text(text = "Signup Screen")
+        Text(text = "Signup Screen: $productId")
     }
 }
