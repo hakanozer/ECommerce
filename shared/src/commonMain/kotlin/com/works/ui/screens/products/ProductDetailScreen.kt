@@ -87,7 +87,7 @@ fun ProductDetailScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(36.dp)
             ) {
                 Text(text = "Favorilere Ekle")
             }
