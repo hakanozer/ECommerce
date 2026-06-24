@@ -2,6 +2,8 @@ package com.works.ui.screens.products
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -22,7 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import com.works.data.local.AppDatabase
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductDetailScreen(
     productId: Int,
@@ -226,11 +228,10 @@ fun ProductDetailScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        data.tags.forEach { tag ->
+                        items(data.tags) { tag ->
                             AssistChip(
                                 onClick = {},
                                 label = { Text(tag) }
