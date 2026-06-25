@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.works.data.dto.ProductItemDto
 import com.works.data.remote.ProductApi
+import com.works.domain.AppStore
 import com.works.ui.components.PaginationBar
 import com.works.ui.components.ProductItem
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import org.koin.compose.koinInject
 fun ProductsScreen(
     onNavigateToDetail: (productId: Int) -> Unit
 ) {
+    val state by AppStore.state.collectAsState()
 
     val productApi: ProductApi = koinInject()
     val scope = rememberCoroutineScope()
@@ -52,6 +54,7 @@ fun ProductsScreen(
 
     LaunchedEffect(Unit) {
         loadProducts(1)
+        println("${state.token} - ${state.username}")
     }
 
     Column(

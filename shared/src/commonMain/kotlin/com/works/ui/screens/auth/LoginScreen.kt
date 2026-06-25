@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.works.TokenStorage
 import com.works.data.dto.UserLoginRequestDto
 import com.works.data.remote.AuthApi
+import com.works.domain.AppStore
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -185,6 +186,7 @@ fun LoginScreen(
                                 val loginRequestDto = UserLoginRequestDto(email, password)
                                 val res = authApi.login(loginRequestDto)
                                 println(res.data.access_token)
+                                AppStore.login(res.data.user.name, res.data.access_token)
                                 // token store
                                 tokenStorage.save(res.data.access_token)
                                 onLoginSuccess()

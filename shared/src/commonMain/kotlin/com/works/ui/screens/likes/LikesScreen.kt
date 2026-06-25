@@ -1,23 +1,21 @@
 package com.works.ui.screens.likes
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.works.data.dto.ProductData
 import com.works.data.dto.ProductItemDto
 import com.works.data.local.AppDatabase
-import com.works.data.local.Product
+import com.works.domain.AppStore
 import com.works.ui.components.ProductItem
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -27,6 +25,7 @@ fun LikesScreen(
     onNavigateToDetail: (productId: Int) -> Unit
 ) {
 
+    val state by AppStore.state.collectAsState()
     val database: AppDatabase = koinInject()
     var products by remember { mutableStateOf<List<ProductItemDto>>(emptyList()) }
     val scope = rememberCoroutineScope()
@@ -52,6 +51,7 @@ fun LikesScreen(
                 )
             }
         }
+        AppStore.login("Ali Bilmem", state.token)
     }
 
     Column(
