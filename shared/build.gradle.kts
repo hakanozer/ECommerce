@@ -52,6 +52,12 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.compose)
             implementation(libs.sqldelight.android.driver)
+
+            implementation(libs.androidx.activity.ktx)
+            implementation(libs.androidx.appcompat)
+            implementation(libs.androidx.constraintlayout)
+            implementation(libs.material)
+            runtimeOnly(libs.compose.uiTooling)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -84,6 +90,7 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.sqldelight.native.driver)
+            implementation(libs.ktor.client.darwin)
         }
         jsMain.dependencies {
             implementation(libs.wrappers.browser)
@@ -97,6 +104,7 @@ kotlin {
     }
 }
 
+
 // JvmTarget → kotlin {} DIŞINA alındı
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     compilerOptions {
@@ -108,9 +116,6 @@ compose.resources {
     packageOfResClass = "com.works.shared"
 }
 
-dependencies {
-    androidRuntimeClasspath(libs.compose.uiTooling)
-}
 
 sqldelight {
     databases {
