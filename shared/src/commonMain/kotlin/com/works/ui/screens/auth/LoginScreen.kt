@@ -41,6 +41,8 @@ import com.works.domain.AppStore
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
+import com.works.platform.openSampleActivity
+
 private val MainColor = Color(0xFFFF3B1F)
 
 @Composable
@@ -200,6 +202,20 @@ fun LoginScreen(
                     ) {
                         Text("LOGIN")
                     }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                OutlinedButton(
+                    onClick = { openSampleActivity() },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(2.dp, MainColor)
+                ) {
+                    Text(
+                        text = "OPEN SAMPLE ACTIVITY",
+                        color = MainColor
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(250.dp))
