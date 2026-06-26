@@ -57,7 +57,13 @@ fun ProfileScreen(
             TopAppBar(
                 title = { Text("Profil Bilgileri") },
                 actions = {
-                    TextButton(onClick = onLogout) {
+                    TextButton(onClick = {
+                        scope.launch {
+                            val response = authApi.logout(state.token)
+                            println("Resonse : $response")
+                            onLogout()
+                        }
+                    }) {
                         Text("Çıkış")
                     }
                 }
@@ -136,7 +142,13 @@ fun ProfileScreen(
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Button(
-                            onClick = onLogout,
+                            onClick = {
+                                scope.launch {
+                                    val response = authApi.logout(state.token)
+                                    println("Resonse : $response")
+                                    onLogout()
+                                }
+                            },
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text("Çıkış Yap")
@@ -174,4 +186,7 @@ fun ProfileField(
             disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant
         )
     )
+
 }
+
+

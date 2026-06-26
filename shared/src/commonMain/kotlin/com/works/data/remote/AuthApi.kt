@@ -17,11 +17,21 @@ import io.ktor.http.contentType
 
 class AuthApi(private val client: HttpClient) {
 
-    suspend fun login(req: UserLoginRequestDto): UserLoginResponseDto =
-        client.post("auth/login") {
-            contentType(ContentType.Application.Json)
-            setBody(req)
-        }.body<UserLoginResponseDto>()
+    suspend fun login(req: UserLoginRequestDto): ApiResult<UserLoginResponseDto>{
+        return try {
+            val response = client.post("auth/login") {
+                contentType(ContentType.Application.Json)
+                setBody(req)
+            }
+            ApiResult.Success(response.body())
+        } catch (e: ClientRequestException) {
+            ApiResult.Error(e.response.status.value, "Unauthorized")
+        } catch (e: Exception) {
+            ApiResult.NetworkError(e.message ?: "Unknown error")
+        }
+    }
+
+
 
     suspend fun profile(
         jwt: String
@@ -31,6 +41,22 @@ class AuthApi(private val client: HttpClient) {
                 header("Authorization", "Bearer $jwt")
             }
             ApiResult.Success(response.body())
+        } catch (e: ClientRequestException) {
+            ApiResult.Error(e.response.status.value, "Unauthorized")
+        } catch (e: Exception) {
+            ApiResult.NetworkError(e.message ?: "Unknown error")
+        }
+    }
+
+
+    suspend fun logout(
+        jwt: String
+    ): ApiResult<Unit> {
+        return try {
+            client.post("auth/logout") {
+                header("Authorization", "Bearer $jwt")
+            }
+            ApiResult.Success(Unit)
         } catch (e: ClientRequestException) {
             ApiResult.Error(e.response.status.value, "Unauthorized")
         } catch (e: Exception) {

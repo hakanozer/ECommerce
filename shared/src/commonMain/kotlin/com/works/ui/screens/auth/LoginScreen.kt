@@ -20,6 +20,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -37,7 +38,10 @@ import androidx.compose.ui.unit.sp
 import com.works.TokenStorage
 import com.works.data.dto.UserLoginRequestDto
 import com.works.data.remote.AuthApi
+import com.works.domain.ApiResult
 import com.works.domain.AppStore
+import com.works.platform.Platform
+import com.works.platform.getPlatform
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -67,10 +71,20 @@ fun LoginScreen(
         mutableStateOf(false)
     }
 
+    var error by remember { mutableStateOf<String?>(null) }
+
+    var width  by remember {
+        mutableStateOf(Modifier.fillMaxSize())
+    }
+    if (getPlatform() == Platform.Desktop) {
+        width = Modifier.width(400.dp)
+    }
+
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = width,
         contentAlignment = Alignment.Center
     ) {
+
 
         Surface(
             modifier = Modifier
@@ -96,6 +110,15 @@ fun LoginScreen(
                     fontWeight = FontWeight.Bold,
                     color = MainColor
                 )
+
+                error?.let {
+                    Text(
+                        text = "Hata oldu, Tekrar deneyiniz!",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+
 
                 Spacer(modifier = Modifier.height(40.dp))
 
@@ -186,12 +209,25 @@ fun LoginScreen(
                         onClick =  {
                             scope.launch {
                                 val loginRequestDto = UserLoginRequestDto(email, password)
-                                val res = authApi.login(loginRequestDto)
-                                println(res.data.access_token)
-                                AppStore.login(res.data.user.name, res.data.access_token)
-                                // token store
-                                tokenStorage.save(res.data.access_token)
-                                onLoginSuccess()
+                                val response = authApi.login(loginRequestDto)
+
+                                when (response) {
+                                    is ApiResult.Success -> {
+                                        val user = response.data
+                                        AppStore.login(user.data.user.name, user.data.access_token)
+                                        tokenStorage.save(user.data.access_token)
+                                        onLoginSuccess()
+
+                                    }
+
+                                    is ApiResult.Error -> {
+                                        error = response.message
+                                    }
+
+                                    is ApiResult.NetworkError -> {
+                                        error = response.message
+                                    }
+                                }
                             }
                         },
                         modifier = Modifier.weight(1f),
@@ -206,16 +242,18 @@ fun LoginScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                OutlinedButton(
-                    onClick = { openSampleActivity() },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    border = BorderStroke(2.dp, MainColor)
-                ) {
-                    Text(
-                        text = "OPEN SAMPLE ACTIVITY",
-                        color = MainColor
-                    )
+                if (getPlatform() == Platform.Android) {
+                    OutlinedButton(
+                        onClick = { openSampleActivity() },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        border = BorderStroke(2.dp, MainColor)
+                    ) {
+                        Text(
+                            text = "OPEN SAMPLE ACTIVITY",
+                            color = MainColor
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(250.dp))
